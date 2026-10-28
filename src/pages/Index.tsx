@@ -2,18 +2,31 @@ import { useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { CafeCompanion } from "@/components/CafeCompanion";
 import { ChapterBridge } from "@/components/ChapterBridge";
+import TerminalContact from "@/components/TerminalContact";
 import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
   Check,
+  BrainCircuit,
+  Braces,
   Cloud,
+  CloudCog,
+  Code2,
   Coffee,
+  Database,
   Download,
+  FlaskConical,
   Github,
+  Leaf,
+  Link2,
   Linkedin,
   Mail,
   Menu,
+  Network,
+  BookOpen,
+  ChartNoAxesCombined,
+  Boxes,
   X,
 } from "lucide-react";
 
@@ -22,9 +35,9 @@ const linkedinUrl = "https://www.linkedin.com/in/akash-shanmugavadivel";
 const email = "akashkumaran15@gmail.com";
 
 const skills = [
-  { label: "Backend", tools: "Java · Spring Boot · REST APIs · API testing" },
-  { label: "Cloud", tools: "AWS · Azure · GCP · Terraform · FinOps" },
-  { label: "AI & data", tools: "Python · RAG · LangChain · SQL · MongoDB" },
+  { label: "Backend", icon: Code2, tools: [{ name: "Java", icon: Coffee }, { name: "Spring Boot", icon: Leaf }, { name: "REST APIs", icon: Network }, { name: "API testing", icon: FlaskConical }] },
+  { label: "Cloud", icon: CloudCog, tools: [{ name: "AWS", icon: Cloud }, { name: "Azure", icon: CloudCog }, { name: "GCP", icon: Cloud }, { name: "Terraform", icon: Boxes }, { name: "FinOps", icon: ChartNoAxesCombined }] },
+  { label: "AI & data", icon: BrainCircuit, tools: [{ name: "Python", icon: Braces }, { name: "RAG", icon: BookOpen }, { name: "LangChain", icon: Link2 }, { name: "SQL", icon: Database }, { name: "MongoDB", icon: Leaf }] },
 ];
 
 const repositories = [
@@ -147,9 +160,9 @@ function Index() {
 
         <section id="cloud" className="cloud-section" aria-labelledby="cloud-title"><div className="page-width cloud-layout"><motion.div className="cloud-intro" initial={reduceMotion ? false : { y: 18 }} whileInView={{ y: 0 }} viewport={{ once: true, amount: .2 }} transition={{ duration: .8 }}><div className="section-label">03 / CLOUD CORNER</div><div className="cloud-badge"><Cloud size={23} /> NOW BREWING AT CORESTACK</div><h2 id="cloud-title">A little cloud.<br /><em>A lot of purpose.</em></h2><div className="role-timeline"><strong>Associate Software Development Engineer</strong><span>Aug 2026 — Present</span><strong>Trainee Engineer</strong><span>Feb 2026 — Aug 2026</span></div><p>My CoreStack work spans cloud governance, right sizing automation, and cost reporting across major cloud platforms.</p><div className="cloud-stack">AWS <span>·</span> AZURE <span>·</span> GCP <span>·</span> TERRAFORM <span>·</span> PYTHON</div></motion.div><motion.div className="cloud-receipt" initial={reduceMotion ? false : { y: 26, rotate: 1 }} whileInView={{ y: 0, rotate: 0 }} viewport={{ once: true, amount: .2 }} transition={{ duration: .9, delay: .12 }}><div className="receipt-top"><span>CORESTACK / SELECTED WORK</span><span>2026</span></div><div className="receipt-item"><span>01</span><div><strong>Policy checks</strong><p>Terraform scanner rules that flag cloud configuration violations.</p></div></div><div className="receipt-item"><span>02</span><div><strong>Smarter sizing</strong><p>Python automation for Amazon RDS and OpenSearch recommendations.</p></div></div><div className="receipt-item"><span>03</span><div><strong>Clearer reporting</strong><p>AI usage cost visibility and recurring GreenOps reports.</p></div></div><div className="receipt-bottom">GOOD SYSTEMS MAKE GOOD DECISIONS POSSIBLE. <span>✳</span></div></motion.div></div></section>
 
-        <section id="skills" className="section pantry-section page-width" aria-labelledby="skills-title"><div className="section-header pantry-header"><div><div className="section-label">04 / THE PANTRY</div><h2 id="skills-title">What I build with.</h2></div><p>A small selection of the tools I reach for most often.</p></div><div className="skill-list">{skills.map((skill, index) => <div className="skill-row" key={skill.label}><span>0{index + 1}</span><strong>{skill.label}</strong><p>{skill.tools}</p><ArrowUpRight size={18} /></div>)}</div></section>
+        <section id="skills" className="section pantry-section page-width" aria-labelledby="skills-title"><div className="section-header pantry-header"><div><div className="section-label">04 / THE PANTRY</div><h2 id="skills-title">What I build with.</h2></div><p>A small selection of the tools I reach for most often.</p></div><div className="skill-list">{skills.map((skill, index) => { const CategoryIcon = skill.icon; return <div className="skill-row" key={skill.label}><span className="skill-number">0{index + 1}</span><span className="skill-heading"><span className="skill-category-icon"><CategoryIcon size={21} strokeWidth={1.8} /></span><strong>{skill.label}</strong></span><div className="skill-tools">{skill.tools.map((tool) => { const ToolIcon = tool.icon; return <span className="skill-tool" key={tool.name}><ToolIcon size={14} strokeWidth={1.8} aria-hidden="true" />{tool.name}</span>; })}</div></div>; })}</div></section>
 
-        <section id="contact" className="contact-section" aria-labelledby="contact-title"><div className="page-width contact-layout"><div><div className="section-label">05 / COME SAY HELLO</div><h2 id="contact-title">Let&apos;s make<br /><em>something useful.</em></h2><p>Have a backend problem, a cloud idea, or just a good question? My inbox is open.</p><a className="button button-light" href={`mailto:${email}?subject=Let's%20build%20something`}>Send me an email <ArrowUpRight size={18} /></a></div><div className="contact-card"><span>FIND ME HERE</span><a href={`mailto:${email}`}><Mail size={20} /> {email} <ArrowUpRight size={16} /></a><a href={githubUrl} target="_blank" rel="noopener noreferrer"><Github size={20} /> GitHub <ArrowUpRight size={16} /></a><a href={linkedinUrl} target="_blank" rel="noopener noreferrer"><Linkedin size={20} /> LinkedIn <ArrowUpRight size={16} /></a><a href="/Akash_S_Resume.pdf" download><Download size={20} /> Download résumé <ArrowUpRight size={16} /></a><div className="contact-card-note"><Coffee size={24} /> GOOD IDEAS START WITH A CONVERSATION.</div></div></div></section>
+        <section id="contact" className="contact-section" aria-labelledby="contact-title"><div className="page-width contact-layout"><div><div className="section-label">05 / COME SAY HELLO</div><h2 id="contact-title">Let&apos;s make<br /><em>something useful.</em></h2><p>Have a backend problem, a cloud idea, or just a good question? My inbox is open.</p><a className="button button-light" href={`mailto:${email}?subject=Let's%20build%20something`}>Send me an email <ArrowUpRight size={18} /></a></div><div className="contact-side"><TerminalContact /><div className="contact-card"><span>FIND ME HERE</span><a href={`mailto:${email}`}><Mail size={20} /> {email} <ArrowUpRight size={16} /></a><a href={githubUrl} target="_blank" rel="noopener noreferrer"><Github size={20} /> GitHub <ArrowUpRight size={16} /></a><a href={linkedinUrl} target="_blank" rel="noopener noreferrer"><Linkedin size={20} /> LinkedIn <ArrowUpRight size={16} /></a><a href="/Akash_S_Resume.pdf" download><Download size={20} /> Download résumé <ArrowUpRight size={16} /></a><div className="contact-card-note"><Coffee size={24} /> GOOD IDEAS START WITH A CONVERSATION.</div></div></div></div></section>
       </main>
       <CafeCompanion />
       <footer className="site-footer"><div className="page-width footer-inner"><span><Coffee size={16} /> JAVA CAFÉ BY AKASH S</span><span>© {new Date().getFullYear()} · BUILT WITH CURIOSITY</span><a href="#top">BACK TO TOP ↑</a></div></footer>

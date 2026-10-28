@@ -1,122 +1,81 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Send, Terminal } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { ArrowUpRight, CornerDownLeft, Terminal } from "lucide-react";
 
-const TerminalContact = () => {
+type Entry = { id: number; text: string; command?: boolean; link?: string; linkLabel?: string; download?: boolean };
+
+const githubUrl = "https://github.com/Akash-Shanmugavadivel";
+const linkedinUrl = "https://www.linkedin.com/in/akash-shanmugavadivel";
+const email = "akashkumaran15@gmail.com";
+
+const initialEntries: Entry[] = [
+  { id: 0, text: "Welcome to Akash's café terminal." },
+  { id: 1, text: "Type help to see what you can explore." },
+];
+
+export default function TerminalContact() {
   const [command, setCommand] = useState("");
-  const [output, setOutput] = useState([
-    "$ Welcome to Akash's terminal interface",
-    "$ Type 'help' for available commands",
-    "$ Ready to connect..."
-  ]);
+  const [entries, setEntries] = useState<Entry[]>(initialEntries);
+  const nextId = useRef(2);
+  const outputRef = useRef<HTMLDivElement>(null);
 
-  const handleCommand = (cmd: string) => {
-    const newOutput = [...output, `$ ${cmd}`];
-    
-    switch (cmd.toLowerCase()) {
+  useEffect(() => {
+    if (outputRef.current) outputRef.current.scrollTop = outputRef.current.scrollHeight;
+  }, [entries]);
+
+  const runCommand = (raw: string) => {
+    const value = raw.trim().toLowerCase();
+    if (!value) return;
+    setCommand("");
+    if (value === "clear") {
+      setEntries([{ id: nextId.current++, text: "Terminal cleared. Type help to start again." }]);
+      return;
+    }
+
+    const next: Entry[] = [{ id: nextId.current++, text: value, command: true }];
+    switch (value) {
       case "help":
-        newOutput.push("Available commands:");
-        newOutput.push("  - email: Get email address");
-        newOutput.push("  - linkedin: Open LinkedIn profile");
-        newOutput.push("  - github: Open GitHub profile");
-        newOutput.push("  - hire: Check availability");
-        newOutput.push("  - clear: Clear terminal");
+        next.push({ id: nextId.current++, text: "Commands: about · projects · github · linkedin · email · resume · clear" });
         break;
-      case "email":
-        newOutput.push("📧 akashkumaran15@gmail.com");
+      case "about":
+        next.push({ id: nextId.current++, text: "Akash builds backend APIs, cloud automation, and useful AI tools." });
         break;
-      case "linkedin":
-        newOutput.push("🔗 Opening LinkedIn profile...");
-        window.open("https://www.linkedin.com/in/akash-shanmugavadivel", "_blank");
+      case "projects":
+        next.push({ id: nextId.current++, text: "Start with the featured projects in the menu.", link: "#work", linkLabel: "Browse projects" });
         break;
       case "github":
-        newOutput.push("🐙 Opening GitHub profile...");
-        window.open("https://github.com/Akash-Shanmugavadivel", "_blank");
+        next.push({ id: nextId.current++, text: "Explore Akash's repositories.", link: githubUrl, linkLabel: "Open GitHub" });
         break;
-      case "hire":
-        newOutput.push("✅ Available for new opportunities!");
-        newOutput.push("💼 Ready to build amazing Java applications");
+      case "linkedin":
+        next.push({ id: nextId.current++, text: "Connect with Akash on LinkedIn.", link: linkedinUrl, linkLabel: "Open LinkedIn" });
         break;
-      case "clear":
-        setOutput(["$ Terminal cleared", "$ Ready for new commands..."]);
-        setCommand("");
-        return;
+      case "email":
+        next.push({ id: nextId.current++, text: email, link: `mailto:${email}`, linkLabel: "Write an email" });
+        break;
+      case "resume":
+        next.push({ id: nextId.current++, text: "A quick overview of Akash's experience.", link: "/Akash_S_Resume.pdf", linkLabel: "Download résumé", download: true });
+        break;
       default:
-        newOutput.push(`Command '${cmd}' not found. Type 'help' for available commands.`);
+        next.push({ id: nextId.current++, text: `Unknown command: ${value}. Type help for the menu.` });
     }
-    
-    setOutput(newOutput);
-    setCommand("");
+    setEntries((previous) => [...previous.slice(-12), ...next]);
+  };
+
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    runCommand(command);
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-      className="terminal max-w-lg mx-auto"
-    >
-      {/* Terminal header */}
-      <div className="flex items-center gap-2 pb-3 mb-4 border-b border-gray-600">
-        <Terminal className="h-4 w-4" />
-        <span className="text-sm font-mono">akash@bytecraft:~$</span>
-        <div className="flex gap-1 ml-auto">
-          <div className="w-3 h-3 rounded-full bg-red-500"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500"></div>
-        </div>
+    <div className="cafe-terminal" aria-label="Interactive contact terminal">
+      <div className="terminal-bar"><span><Terminal size={17} /> akash@java-cafe:~</span><span className="terminal-lights" aria-hidden="true"><i /><i /><i /></span></div>
+      <div className="terminal-output" ref={outputRef} aria-live="polite" aria-relevant="additions text">
+        {entries.map((entry) => <div className={`terminal-entry${entry.command ? " terminal-command" : ""}`} key={entry.id}>
+          <span className="terminal-prompt" aria-hidden="true">{entry.command ? "$" : "›"}</span>
+          <span>{entry.text}{entry.link && <a href={entry.link} target={entry.link.startsWith("http") ? "_blank" : undefined} rel={entry.link.startsWith("http") ? "noopener noreferrer" : undefined} download={entry.download || undefined}>{entry.linkLabel} <ArrowUpRight size={13} /></a>}</span>
+        </div>)}
       </div>
-
-      {/* Terminal output */}
-      <div className="space-y-1 mb-4 max-h-48 overflow-y-auto">
-        {output.map((line, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
-            className="font-mono text-sm"
-          >
-            {line}
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Terminal input */}
-      <div className="flex items-center gap-2">
-        <span className="text-green-400 font-mono text-sm">$</span>
-        <Input
-          value={command}
-          onChange={(e) => setCommand(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter" && command.trim()) {
-              handleCommand(command.trim());
-            }
-          }}
-          placeholder="Type a command..."
-          className="bg-transparent border-none text-green-400 font-mono text-sm focus:ring-0 focus:outline-none p-0"
-        />
-        <Button
-          size="sm"
-          variant="ghost"
-          onClick={() => command.trim() && handleCommand(command.trim())}
-          className="text-green-400 hover:text-green-300 p-1"
-        >
-          <Send className="h-4 w-4" />
-        </Button>
-      </div>
-
-      {/* Blinking cursor */}
-      <motion.div
-        animate={{ opacity: [1, 0, 1] }}
-        transition={{ duration: 1, repeat: Infinity }}
-        className="inline-block w-2 h-4 bg-green-400 ml-2"
-      />
-    </motion.div>
+      <form className="terminal-form" onSubmit={submit}><label htmlFor="cafe-terminal-input">$ <span className="sr-only">Terminal command</span></label><input id="cafe-terminal-input" value={command} onChange={(event) => setCommand(event.target.value)} placeholder="Type a command…" autoComplete="off" spellCheck={false} /><button type="submit" aria-label="Run terminal command"><CornerDownLeft size={17} /></button></form>
+      <div className="terminal-shortcuts" aria-label="Try a command">{["help", "projects", "github", "email"].map((item) => <button type="button" key={item} onClick={() => runCommand(item)}>{item}</button>)}</div>
+    </div>
   );
-};
-
-export default TerminalContact;
+}
