@@ -1,24 +1,18 @@
+# Akash S — Developer Portfolio
 
-Follow these steps:
+A café-inspired personal portfolio focused on Java backend work, Python projects, and practical cloud engineering. Built with React, TypeScript, Vite, and CSS.
+
+## Run locally
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm ci
 npm run dev
 ```
 
-This project is built with .
+Open the local URL printed by Vite. To create a production build, run `npm run build`.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Updating content
+
+The portfolio copy, projects, experience, skills, and contact links are in `src/pages/Index.tsx`. Page styles are in `src/index.css`; search metadata is in `index.html`. The downloadable resume is `public/Akash_S_Resume.pdf`.
+
+Review dates, project outcomes, profile links, and the resume before publishing updates.
