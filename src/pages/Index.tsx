@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { CafeCompanion } from "@/components/CafeCompanion";
 import { CoffeeBeanScatter } from "@/components/CoffeeBeanScatter";
@@ -31,6 +31,8 @@ import {
   Pause,
   Play,
   Moon,
+  Volume2,
+  VolumeX,
   Sun,
   X,
 } from "lucide-react";
@@ -153,6 +155,8 @@ function Index() {
   const [motionPaused, setMotionPaused] = useState(readMotionPreference);
   const [theme, setTheme] = useState(readThemePreference);
   const [selectedBrew, setSelectedBrew] = useState(0);
+  const [soundOn, setSoundOn] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const closeMenu = () => setMenuOpen(false);
   const reduceMotion = useReducedMotion();
   const motionOff = Boolean(reduceMotion) || motionPaused;
@@ -174,6 +178,31 @@ function Index() {
     try { window.localStorage.setItem("java-cafe-motion-paused", String(next)); }
     catch { /* Keep the control usable when storage is unavailable. */ }
   };
+  const toggleSound = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (soundOn) {
+      audio.pause();
+      setSoundOn(false);
+      return;
+    }
+    try {
+      await audio.play();
+      setSoundOn(true);
+    } catch {
+      setSoundOn(false);
+    }
+  };
+  useEffect(() => {
+    const pauseWhenHidden = () => {
+      if (document.hidden && audioRef.current) {
+        audioRef.current.pause();
+        setSoundOn(false);
+      }
+    };
+    document.addEventListener("visibilitychange", pauseWhenHidden);
+    return () => document.removeEventListener("visibilitychange", pauseWhenHidden);
+  }, []);
   const toggleTheme = () => {
     const next = theme === "morning" ? "midnight" : "morning";
     setTheme(next);
@@ -195,7 +224,7 @@ function Index() {
       <header className="site-header"><div className="header-inner page-width">
         <a className="brand" href="#top" onClick={closeMenu} aria-label="Java Café by Akash S, back to top"><span className="brand-icon"><Coffee size={24} strokeWidth={2.2} /></span><span><strong>Java Café</strong><small>by Akash S</small></span></a>
         <nav id="main-navigation" className={menuOpen ? "navigation navigation-open" : "navigation"} aria-label="Main navigation"><a href="#work" onClick={closeMenu}>Signature Brews</a><a href="#about" onClick={closeMenu}>Meet the Barista</a><a href="#cloud" onClick={closeMenu}>Café Specials</a><a href="#process" onClick={closeMenu}>Brewing Process</a><a href="#contact" onClick={closeMenu}>Reserve a Table</a></nav>
-        <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={theme === "morning" ? "Switch to Midnight Espresso theme" : "Switch to Morning Café theme"} aria-pressed={theme === "midnight"}>{theme === "morning" ? <Moon size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />}<span>{theme === "morning" ? "Midnight Espresso" : "Morning Café"}</span></button><button className="motion-toggle" type="button" onClick={toggleMotion} aria-pressed={motionPaused} aria-label={reduceMotion ? "Motion reduced by device settings" : motionPaused ? "Resume animations" : "Pause animations"} disabled={Boolean(reduceMotion)}>{reduceMotion ? <Pause size={15} aria-hidden="true" /> : motionPaused ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}<span>{reduceMotion ? "Motion reduced" : motionPaused ? "Resume motion" : "Pause motion"}</span></button><a className="header-resume" href="/Akash_S_Resume.pdf" download>Get my résumé <ArrowUpRight size={15} /></a>
+        <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={theme === "morning" ? "Switch to Midnight Espresso theme" : "Switch to Morning Café theme"} aria-pressed={theme === "midnight"}>{theme === "morning" ? <Moon size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />}<span>{theme === "morning" ? "Midnight Espresso" : "Morning Café"}</span></button><button className="motion-toggle" type="button" onClick={toggleMotion} aria-pressed={motionPaused} aria-label={reduceMotion ? "Motion reduced by device settings" : motionPaused ? "Resume animations" : "Pause animations"} disabled={Boolean(reduceMotion)}>{reduceMotion ? <Pause size={15} aria-hidden="true" /> : motionPaused ? <Play size={15} aria-hidden="true" /> : <Pause size={15} aria-hidden="true" />}<span>{reduceMotion ? "Motion reduced" : motionPaused ? "Resume motion" : "Pause motion"}</span></button><button className="sound-toggle" type="button" onClick={toggleSound} aria-label={soundOn ? "Pause café ambience" : "Play café ambience"} aria-pressed={soundOn}>{soundOn ? <Volume2 size={15} aria-hidden="true" /> : <VolumeX size={15} aria-hidden="true" />}<span>{soundOn ? "Sound on" : "Café ambience"}</span></button><audio ref={audioRef} src="/audio/cafe-ambience.mp3" loop preload="metadata" /> <a className="header-resume" href="/Akash_S_Resume.pdf" download>Get my résumé <ArrowUpRight size={15} /></a>
         <button className="menu-button" type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={24} /> : <Menu size={24} />}</button>
       </div></header>
 

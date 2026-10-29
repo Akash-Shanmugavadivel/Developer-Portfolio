@@ -107,6 +107,8 @@ html.motion-paused-document{scroll-behavior:auto}
 .button-light:hover{background:#211611;color:#F3E8D7}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 10px;border:1px solid #6F4E37;border-radius:100px;background:transparent;color:#211611;cursor:pointer;font:700 10px/1 'DM Sans',sans-serif;white-space:nowrap}
 .theme-toggle:hover,.motion-toggle:hover:not(:disabled){background:#e8d5bd}
+.sound-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 10px;border:1px solid #6F4E37;border-radius:100px;background:transparent;color:#211611;cursor:pointer;font:700 10px/1 'DM Sans',sans-serif;white-space:nowrap}
+.sound-toggle:hover{background:#e8d5bd}
 .motion-toggle{margin-left:0;border-color:#6F4E37;color:#211611}
 
 /* Coffee-inspired skill choices and project recipes. */
@@ -147,6 +149,7 @@ html.motion-paused-document{scroll-behavior:auto}
 .theme-midnight .brand strong,.theme-midnight .navigation a,.theme-midnight .header-resume,.theme-midnight .menu-button,.theme-midnight .theme-toggle,.theme-midnight .motion-toggle{color:#F3E8D7}
 .theme-midnight .theme-toggle,.theme-midnight .motion-toggle,.theme-midnight .header-resume{border-color:#C28B56}
 .theme-midnight .theme-toggle:hover,.theme-midnight .motion-toggle:hover:not(:disabled),.theme-midnight .header-resume:hover{background:#6F4E37}
+.theme-midnight .sound-toggle{color:#F3E8D7;border-color:#C28B56}.theme-midnight .sound-toggle:hover{background:#6F4E37}
 .theme-midnight .brand small,.theme-midnight .hero-copy>p,.theme-midnight .section-header>p,.theme-midnight .scroll-note,.theme-midnight .hero-footer span,.theme-midnight .menu-end span{color:#E6D3BB}
 .theme-midnight .eyebrow,.theme-midnight .section-label,.theme-midnight .menu-end a,.theme-midnight .hero h1 em,.theme-midnight .section h2 em,.theme-midnight .process-section h2 em{color:#D9AA73}
 .theme-midnight .current-build,.theme-midnight .menu-card,.theme-midnight .github-shelf,.theme-midnight .repository-card{background:#36251c;color:#F3E8D7;border-color:#6F4E37}
@@ -171,6 +174,6 @@ html.motion-paused-document{scroll-behavior:auto}
 .theme-midnight .navigation-open{background:#211611}
 .theme-midnight :focus-visible{outline-color:#D9AA73}
 
-@media(max-width:1150px){.navigation{display:none;position:absolute;left:0;right:0;top:86px;background:#F3E8D7;border-bottom:1px solid #C28B56;padding:14px 18px;flex-direction:column;align-items:stretch;gap:0;box-shadow:0 14px 20px #21161122}.navigation-open{display:flex}.navigation a{padding:14px 5px}.menu-button{display:block}.theme-toggle span,.motion-toggle span{display:none}.theme-toggle,.motion-toggle{min-width:38px;padding:8px}}
-@media(max-width:760px){.navigation{top:69px}.site-header .header-inner{gap:6px}.brand{gap:7px}.brand strong{font-size:19px}.brand-icon{width:35px;height:35px}.theme-toggle,.motion-toggle{min-width:34px;min-height:34px;padding:6px}.header-resume{padding:8px}.brew-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.brew-option{min-height:116px}.brew-tasting{display:block}.brew-tasting p{margin-top:8px}.process-section{padding:85px 0}.process-grid{grid-template-columns:1fr}.process-grid article{min-height:0}}
+@media(max-width:1150px){.navigation{display:none;position:absolute;left:0;right:0;top:86px;background:#F3E8D7;border-bottom:1px solid #C28B56;padding:14px 18px;flex-direction:column;align-items:stretch;gap:0;box-shadow:0 14px 20px #21161122}.navigation-open{display:flex}.navigation a{padding:14px 5px}.menu-button{display:block}.theme-toggle span,.motion-toggle span,.sound-toggle span{display:none}.theme-toggle,.motion-toggle,.sound-toggle{min-width:38px;padding:8px}}
+@media(max-width:760px){.navigation{top:69px}.site-header .header-inner{gap:6px}.brand{gap:7px}.brand strong{font-size:19px}.brand-icon{width:35px;height:35px}.theme-toggle,.motion-toggle,.sound-toggle{min-width:34px;min-height:34px;padding:6px}.header-resume{padding:8px}.brew-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.brew-option{min-height:116px}.brew-tasting{display:block}.brew-tasting p{margin-top:8px}.process-section{padding:85px 0}.process-grid{grid-template-columns:1fr}.process-grid article{min-height:0}}
 @media(max-width:380px){.brand small{font-size:8px}.header-resume{padding:7px}.menu-button svg{width:21px}.site-header .header-inner{gap:4px}}
