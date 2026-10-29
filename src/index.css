@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,500,0,1;9..144,600,0,1;9..144,700,0,1&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -52,7 +50,7 @@
 .hero,.menu-section,.story-section,.cloud-section,.pantry-section{position:relative}
 .coffee-bean-scatter{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .hero>.coffee-bean-scatter,.menu-section>.coffee-bean-scatter,.pantry-section>.coffee-bean-scatter{left:-44px;width:calc(100% + 88px)}
-.scattered-bean{position:absolute;display:block;border:1px solid #663923;border-radius:57% 43% 55% 45% / 48% 57% 43% 52%;background:linear-gradient(135deg,#a56a45 5%,#71432c 58%,#4c2b20 100%);box-shadow:2px 4px 5px #51352233;opacity:.48;will-change:transform}
+.scattered-bean{position:absolute;display:block;border:1px solid #663923;border-radius:57% 43% 55% 45% / 48% 57% 43% 52%;background:linear-gradient(135deg,#a56a45 5%,#71432c 58%,#4c2b20 100%);box-shadow:2px 4px 5px #51352233;opacity:.48}
 .scattered-bean:after{content:"";position:absolute;top:12%;bottom:10%;left:47%;width:12%;border-radius:50%;background:#d5a277;transform:rotate(8deg);opacity:.82}
 .scattered-bean-light{background:linear-gradient(135deg,#bd8660,#815239 65%,#66402e);opacity:.42}
 .scattered-bean-dark{background:linear-gradient(135deg,#865338,#4e3024);opacity:.42}
@@ -60,3 +58,119 @@
 .hero-copy,.hero-visual-motion,.scroll-note,.menu-section>:not(.coffee-bean-scatter),.story-layout,.cloud-layout,.pantry-section>:not(.coffee-bean-scatter){position:relative;z-index:1}
 @media(max-width:1050px){.hero>.coffee-bean-scatter,.menu-section>.coffee-bean-scatter,.pantry-section>.coffee-bean-scatter{left:-29px;width:calc(100% + 58px)}}
 @media(max-width:760px){.hero>.coffee-bean-scatter,.menu-section>.coffee-bean-scatter,.pantry-section>.coffee-bean-scatter{left:-18px;width:calc(100% + 36px)}.coffee-bean-scatter .scattered-bean:nth-child(n+4){display:none}.scattered-bean{opacity:.35}}
+
+/* Keep the café readable and let visitors stop decorative motion. */
+.motion-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 10px;margin-left:auto;border:1px solid #a78570;border-radius:100px;background:transparent;color:#3a2b24;cursor:pointer;font:700 10px/1 'DM Sans',sans-serif;white-space:nowrap}
+.motion-toggle:hover:not(:disabled){background:#ede1cf}
+.motion-toggle:disabled{cursor:default;opacity:.72}
+.motion-paused *, .motion-paused *::before, .motion-paused *::after{animation-play-state:paused!important;transition-duration:0s!important}
+html.motion-paused-document{scroll-behavior:auto}
+:focus-visible{outline:3px solid #3a2b24;outline-offset:3px}
+.cloud-section :focus-visible,.contact-section :focus-visible,.cafe-terminal :focus-visible{outline-color:#fff8ea}
+.eyebrow,.section-label,.menu-end a{color:#a3492c}
+.brand small,.scroll-note,.hero-footer span,.menu-end span,.card-overline span:last-child,.repository-top span:last-child,.current-build-type{color:#765743}
+.marquee-band,.contact-section{background:#a44627}
+.button-dark:hover{background:#a44627}
+.contact-section .section-label{color:#ffe1c2}
+.contact-section .contact-card>span{color:#a3492c}
+.chapter-bridge p span{opacity:1}
+.story-mark,.story-signoff{color:#7c452f}
+.story-section h2 em{color:#a3492c}
+.receipt-bottom{color:#4b6065}
+.skill-row>.skill-number{color:#a3492c}
+.contact-card-note{color:#765743}
+@media(max-width:1050px){.motion-toggle span{display:none}.motion-toggle{min-width:38px;padding:8px}}
+@media(max-width:760px){.site-header .header-inner{gap:8px}.motion-toggle{margin-left:auto}.header-resume{margin-left:0}}
+
+/* Morning Café and Midnight Espresso share the same five-color palette. */
+.cafe-site{background:#F3E8D7;color:#211611}
+.top-note,.site-footer{background:#211611;color:#F3E8D7}
+.site-header{background:#F3E8D7;border-color:#C28B56}
+.brand-icon,.button-dark{background:#6F4E37;color:#F3E8D7}
+.button-dark:hover{background:#211611}
+.brand small,.scroll-note,.hero-footer span,.menu-end span,.card-overline span:last-child,.repository-top span:last-child,.current-build-type{color:#6F4E37}
+.eyebrow,.section-label,.menu-end a,.project-repo-link,.current-build-status{color:#6F4E37}
+.hero h1 em,.section h2 em,.process-section h2 em{color:#6F4E37}
+.coffee-scene{background:#D9AA73}
+.scene-code-one{background:#211611}.scene-code-two{background:#6F4E37}
+.current-build,.menu-card,.repository-card{background:#fff9ef;border-color:#D9AA73}
+.current-build{border-left-color:#6F4E37}
+.marquee-band,.contact-section{background:#6F4E37;color:#F3E8D7}
+.story-section{background:#D9AA73;color:#211611}
+.story-mark,.story-signoff,.story-section .section-label{color:#211611}
+.story-section h2 em{color:#6F4E37}
+.story-copy>p{color:#35241b}
+.cloud-section{background:#211611;color:#F3E8D7}
+.cloud-section h2 em,.cloud-section .section-label{color:#D9AA73}
+.contact-section .section-label,.contact-section h2 em,.contact-layout>div:first-child>p{color:#F3E8D7}
+.button-light{background:#F3E8D7;color:#211611}
+.button-light:hover{background:#211611;color:#F3E8D7}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 10px;border:1px solid #6F4E37;border-radius:100px;background:transparent;color:#211611;cursor:pointer;font:700 10px/1 'DM Sans',sans-serif;white-space:nowrap}
+.theme-toggle:hover,.motion-toggle:hover:not(:disabled){background:#e8d5bd}
+.motion-toggle{margin-left:0;border-color:#6F4E37;color:#211611}
+
+/* Coffee-inspired skill choices and project recipes. */
+.brew-menu{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:15px}
+.brew-option{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-height:130px;padding:18px;border:1px solid #C28B56;border-radius:15px;background:#fff9ef;color:#211611;text-align:left;cursor:pointer;transition:transform .2s,background .2s}
+.brew-option:hover{transform:translateY(-3px)}
+.brew-option-active{background:#6F4E37;color:#F3E8D7}
+.brew-option span{font:600 22px/1.1 'Fraunces',serif}
+.brew-option small{font:700 10px/1.2 'DM Mono',monospace;letter-spacing:.05em;text-transform:uppercase}
+.brew-tasting{display:flex;align-items:center;gap:24px;min-height:70px;margin-bottom:36px;padding:15px 20px;border-radius:12px;background:#D9AA73;color:#211611}
+.brew-tasting span{flex:none;font:700 10px/1.3 'DM Mono',monospace;letter-spacing:.08em}
+.brew-tasting p{margin:0;font-size:13px;line-height:1.5}
+.recipe-architecture{margin-top:18px;padding:13px 15px;border:1px dashed #C28B56;border-radius:10px;background:#f8ead7}
+.recipe-architecture span{color:#6F4E37;font:700 10px/1.2 'DM Mono',monospace;letter-spacing:.08em}
+.recipe-architecture p{margin:7px 0 0;font-size:12px;line-height:1.5;color:#35241b}
+
+/* A short, readable account of how the work is made. */
+.process-section{padding:105px 0 115px;background:#F3E8D7;scroll-margin-top:80px}
+.process-section h2{margin:0;font:600 clamp(43px,5vw,72px)/1.08 'Fraunces',serif;letter-spacing:-.055em}
+.process-section h2 em{font-style:italic}
+.process-intro{max-width:610px;margin:24px 0 36px;color:#5d4637;font-size:15px;line-height:1.7}
+.process-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.process-grid article{min-height:225px;padding:25px 26px;border-radius:18px;background:#211611;color:#F3E8D7}
+.process-grid article>span{display:block;color:#D9AA73;font:700 10px/1.2 'DM Mono',monospace;letter-spacing:.08em}
+.process-grid article svg{margin-top:23px;color:#D9AA73}
+.process-grid h3{margin:14px 0 10px;font:600 25px/1.12 'Fraunces',serif;letter-spacing:-.03em}
+.process-grid p{margin:0;color:#E6D3BB;font-size:13px;line-height:1.6}
+
+/* Decorative steam stays behind the greeting. */
+.eyebrow{position:relative;isolation:isolate}
+.eyebrow:after{content:"";position:absolute;z-index:-1;left:75px;top:-28px;width:28px;height:35px;border-left:2px solid #C28B56;border-right:2px solid #C28B56;border-radius:50%;opacity:.28;transform:rotate(20deg);animation:greeting-steam 4s ease-in-out infinite}
+@keyframes greeting-steam{50%{transform:rotate(90deg) translateX(-7px);opacity:.48}}
+
+/* The night theme changes surfaces and text, while retaining warm accents. */
+.theme-midnight{background:#211611;color:#F3E8D7}
+.theme-midnight .top-note,.theme-midnight .site-footer{background:#130d0a}
+.theme-midnight .site-header{background:#211611;border-color:#6F4E37}
+.theme-midnight .brand strong,.theme-midnight .navigation a,.theme-midnight .header-resume,.theme-midnight .menu-button,.theme-midnight .theme-toggle,.theme-midnight .motion-toggle{color:#F3E8D7}
+.theme-midnight .theme-toggle,.theme-midnight .motion-toggle,.theme-midnight .header-resume{border-color:#C28B56}
+.theme-midnight .theme-toggle:hover,.theme-midnight .motion-toggle:hover:not(:disabled),.theme-midnight .header-resume:hover{background:#6F4E37}
+.theme-midnight .brand small,.theme-midnight .hero-copy>p,.theme-midnight .section-header>p,.theme-midnight .scroll-note,.theme-midnight .hero-footer span,.theme-midnight .menu-end span{color:#E6D3BB}
+.theme-midnight .eyebrow,.theme-midnight .section-label,.theme-midnight .menu-end a,.theme-midnight .hero h1 em,.theme-midnight .section h2 em,.theme-midnight .process-section h2 em{color:#D9AA73}
+.theme-midnight .current-build,.theme-midnight .menu-card,.theme-midnight .github-shelf,.theme-midnight .repository-card{background:#36251c;color:#F3E8D7;border-color:#6F4E37}
+.theme-midnight .current-build p,.theme-midnight .menu-card-content>p,.theme-midnight .repository-card p,.theme-midnight .shelf-heading p,.theme-midnight .current-build h2 span{color:#E6D3BB}
+.theme-midnight .current-build-status,.theme-midnight .current-build-content>a,.theme-midnight .project-repo-link,.theme-midnight .card-overline,.theme-midnight .repository-top{color:#D9AA73}
+.theme-midnight .tech-tags span,.theme-midnight .recipe-architecture,.theme-midnight .skill-tool{background:#493228;color:#F3E8D7;border-color:#7b5a42}
+.theme-midnight .recipe-architecture p,.theme-midnight .recipe-architecture span,.theme-midnight .skill-row strong{color:#F3E8D7}
+.theme-midnight .story-section{background:#6F4E37;color:#F3E8D7}
+.theme-midnight .story-copy>p,.theme-midnight .story-mark,.theme-midnight .story-signoff,.theme-midnight .story-section .section-label{color:#F3E8D7}
+.theme-midnight .story-section h2 em{color:#D9AA73}
+.theme-midnight .cloud-section{background:#130d0a}
+.theme-midnight .chapter-bridge-cream,.theme-midnight .chapter-bridge-coffee{background:#211611;color:#D9AA73}
+.theme-midnight .skill-row{border-color:#6F4E37}
+.theme-midnight .skill-row:hover{background:#36251c}
+.theme-midnight .skill-category-icon{background:#493228;border-color:#7b5a42;color:#D9AA73}
+.theme-midnight .brew-option{background:#36251c;color:#F3E8D7;border-color:#6F4E37}
+.theme-midnight .brew-option-active{background:#6F4E37}
+.theme-midnight .brew-tasting{background:#C28B56;color:#211611}
+.theme-midnight .process-section{background:#2a1c16}
+.theme-midnight .process-intro{color:#E6D3BB}
+.theme-midnight .process-grid article{background:#36251c}
+.theme-midnight .navigation-open{background:#211611}
+.theme-midnight :focus-visible{outline-color:#D9AA73}
+
+@media(max-width:1150px){.navigation{display:none;position:absolute;left:0;right:0;top:86px;background:#F3E8D7;border-bottom:1px solid #C28B56;padding:14px 18px;flex-direction:column;align-items:stretch;gap:0;box-shadow:0 14px 20px #21161122}.navigation-open{display:flex}.navigation a{padding:14px 5px}.menu-button{display:block}.theme-toggle span,.motion-toggle span{display:none}.theme-toggle,.motion-toggle{min-width:38px;padding:8px}}
+@media(max-width:760px){.navigation{top:69px}.site-header .header-inner{gap:6px}.brand{gap:7px}.brand strong{font-size:19px}.brand-icon{width:35px;height:35px}.theme-toggle,.motion-toggle{min-width:34px;min-height:34px;padding:6px}.header-resume{padding:8px}.brew-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.brew-option{min-height:116px}.brew-tasting{display:block}.brew-tasting p{margin-top:8px}.process-section{padding:85px 0}.process-grid{grid-template-columns:1fr}.process-grid article{min-height:0}}
+@media(max-width:380px){.brand small{font-size:8px}.header-resume{padding:7px}.menu-button svg{width:21px}.site-header .header-inner{gap:4px}}

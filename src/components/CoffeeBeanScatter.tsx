@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
 type Bean = { x: number; y: number; size: number; angle: number; drift: number; shade?: "light" | "dark" };
 type Area = "hero" | "menu" | "story" | "cloud" | "pantry";
@@ -45,16 +45,16 @@ function ScatteredBean({ bean, progress, still }: { bean: Bean; progress: Motion
   const rotate = useTransform(progress, [0, 1], [bean.angle - 13, bean.angle + 13]);
 
   return (
-    <motion.span
+    <m.span
       className={`scattered-bean${bean.shade ? ` scattered-bean-${bean.shade}` : ""}`}
       style={{ left: `${bean.x}%`, top: `${bean.y}%`, width: bean.size, height: bean.size * 1.38, y: still ? 0 : y, rotate: still ? bean.angle : rotate }}
     />
   );
 }
 
-export function CoffeeBeanScatter({ area }: { area: Area }) {
+export function CoffeeBeanScatter({ area, motionPaused = false }: { area: Area; motionPaused?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
-  const still = Boolean(useReducedMotion());
+  const still = Boolean(useReducedMotion()) || motionPaused;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
   return (

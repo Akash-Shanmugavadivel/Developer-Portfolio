@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, X } from "lucide-react";
 
 type Chapter = "top" | "work" | "about" | "cloud" | "skills" | "contact";
@@ -18,12 +18,12 @@ function readHiddenPreference() {
   catch { return false; }
 }
 
-export function CafeCompanion() {
+export function CafeCompanion({ motionPaused = false }: { motionPaused?: boolean }) {
   const [hidden, setHidden] = useState(readHiddenPreference);
   const [chatting, setChatting] = useState(false);
   const [chapter, setChapter] = useState<Chapter>("top");
   const [scrolling, setScrolling] = useState(false);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = Boolean(useReducedMotion()) || motionPaused;
 
   useEffect(() => {
     let frame = 0;
@@ -72,10 +72,10 @@ export function CafeCompanion() {
       <div className="bean-walkway">
         <div className="bean-group">
           {chatting && (
-            <motion.div className="bean-bubble" role="status" key={chapter} initial={reduceMotion ? false : { opacity: .8, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .3 }}>
+            <m.div className="bean-bubble" role="status" key={chapter} initial={reduceMotion ? false : { opacity: .8, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .3 }}>
               <span>{note.message}</span>
               {note.link && <a href={note.link} onClick={() => setChatting(false)}>{note.label} <ArrowUpRight size={12} /></a>}
-            </motion.div>
+            </m.div>
           )}
           <button className="bean-button" type="button" onClick={() => setChatting(!chatting)} aria-label={`Coffee bean companion: ${note.message}`} aria-expanded={chatting}>
             <span className="bean-shadow" />

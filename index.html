@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght,SOFT,WONK@9..144,500,0,1;9..144,600,0,1;9..144,700,0,1&amp;display=swap" rel="stylesheet" />
     <meta name="theme-color" content="#f8f3e9" />
     <title>Java Café by Akash S | Backend Developer Portfolio</title>
     <meta name="description" content="Java Café is Akash S's portfolio: Spring Boot APIs, Python projects, and practical cloud work, served with curiosity." />
@@ -10,9 +13,17 @@
     <meta property="og:title" content="Java Café by Akash S" />
     <meta property="og:description" content="Good code. Strong coffee. Better systems. Explore Akash's backend projects and cloud work." />
     <meta property="og:type" content="website" />
+    <style>
+      #brew-loader{position:fixed;top:14px;right:14px;z-index:200;display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:30px;background:#211611;color:#F3E8D7;font:600 10px/1.2 system-ui,sans-serif;letter-spacing:.04em;box-shadow:0 6px 18px #21161133;pointer-events:none}
+      .brew-loader-cup{position:relative;width:18px;height:17px;border:2px solid #F3E8D7;border-radius:2px 2px 7px 7px;overflow:hidden}
+      .brew-loader-cup:after{content:"";position:absolute;inset:auto 0 0;height:0;background:#C28B56;animation:coffee-fill .7s ease-out forwards}
+      @keyframes coffee-fill{to{height:72%}}
+      @media(prefers-reduced-motion:reduce){#brew-loader{display:none}}
+    </style>
   </head>
 
   <body>
+    <div id="brew-loader" aria-hidden="true"><span class="brew-loader-cup"></span><span>Brewing Java Café</span></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

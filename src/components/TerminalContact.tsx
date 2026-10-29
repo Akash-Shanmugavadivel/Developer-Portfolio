@@ -34,13 +34,19 @@ export default function TerminalContact() {
     const next: Entry[] = [{ id: nextId.current++, text: value, command: true }];
     switch (value) {
       case "help":
-        next.push({ id: nextId.current++, text: "Commands: about · projects · github · linkedin · email · resume · clear" });
+        next.push({ id: nextId.current++, text: "Commands: about · skills · projects · contact · github · linkedin · email · resume · clear" });
         break;
       case "about":
         next.push({ id: nextId.current++, text: "Akash builds backend APIs, cloud automation, and useful AI tools." });
         break;
       case "projects":
         next.push({ id: nextId.current++, text: "Start with the featured projects in the menu.", link: "#work", linkLabel: "Browse projects" });
+        break;
+      case "skills":
+        next.push({ id: nextId.current++, text: "The coffee menu pairs familiar brews with Akash's tools.", link: "#skills", linkLabel: "Open skills menu" });
+        break;
+      case "contact":
+        next.push({ id: nextId.current++, text: "Pull up a chair and send Akash a note.", link: `mailto:${email}`, linkLabel: "Write an email" });
         break;
       case "github":
         next.push({ id: nextId.current++, text: "Explore Akash's repositories.", link: githubUrl, linkLabel: "Open GitHub" });
@@ -75,7 +81,7 @@ export default function TerminalContact() {
         </div>)}
       </div>
       <form className="terminal-form" onSubmit={submit}><label htmlFor="cafe-terminal-input">$ <span className="sr-only">Terminal command</span></label><input id="cafe-terminal-input" value={command} onChange={(event) => setCommand(event.target.value)} placeholder="Type a command…" autoComplete="off" spellCheck={false} /><button type="submit" aria-label="Run terminal command"><CornerDownLeft size={17} /></button></form>
-      <div className="terminal-shortcuts" aria-label="Try a command">{["help", "projects", "github", "email"].map((item) => <button type="button" key={item} onClick={() => runCommand(item)}>{item}</button>)}</div>
+      <div className="terminal-shortcuts" aria-label="Try a command">{["help", "skills", "projects", "contact"].map((item) => <button type="button" key={item} onClick={() => runCommand(item)}>{item}</button>)}</div>
     </div>
   );
 }
