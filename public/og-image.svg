@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#F3E8D7"/>
+  <circle cx="1040" cy="100" r="260" fill="#D9AA73" opacity=".35"/>
+  <circle cx="1080" cy="620" r="290" fill="#6F4E37" opacity=".13"/>
+  <path d="M820 395h190v94a78 78 0 0 1-78 78h-34a78 78 0 0 1-78-78v-94Zm190 25h32a44 44 0 0 1 0 88h-39" fill="#FFF9EF" stroke="#6F4E37" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M865 352c-26-35 25-44 0-80m74 80c-26-35 25-44 0-80m72 80c-26-35 25-44 0-80" fill="none" stroke="#C28B56" stroke-width="12" stroke-linecap="round"/>
+  <text x="88" y="142" fill="#6F4E37" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="5">JAVA CAFÉ  /  AKASH S</text>
+  <text x="82" y="300" fill="#211611" font-family="Georgia,serif" font-size="78" font-weight="700">Backend &amp; Cloud</text>
+  <text x="86" y="390" fill="#6F4E37" font-family="Georgia,serif" font-size="72" font-weight="700">Engineer</text>
+  <path d="M88 440h125" stroke="#C28B56" stroke-width="8" stroke-linecap="round"/>
+  <text x="88" y="510" fill="#211611" font-family="Arial,sans-serif" font-size="27">Java · Spring Boot · Python · Cloud</text>
+  <text x="88" y="564" fill="#6F4E37" font-family="Arial,sans-serif" font-size="20" letter-spacing="3">GOOD CODE. STRONG COFFEE. BETTER SYSTEMS.</text>
+</svg>
